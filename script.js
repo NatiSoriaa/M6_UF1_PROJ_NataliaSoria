@@ -1,6 +1,6 @@
 window.onload = () => {
     // Crear tarjetas
-    // crearTarjetas(filosofos)
+    crearTarjetas(filosofos)
 
     // Crear handlers para los botones de control
     let botonCrearTarjeta = document.querySelector('.create-btn');
@@ -34,11 +34,44 @@ function crearTarjetas(filosofos) {
         info.append(filaInfo);
 
         // Añadimos info del país a filaInfo
+        //creamos lista de informacion de pais
+        let infoPais = document.createElement('div');
+        infoPais.classList.add('info-pais');
+        //creamos imagen del pais y lo agregamos a la info pais
+        let imagenPais = document.createElement('img');
+        imagenPais.src = filosofo.pais.bandera;
+        imagenPais.alt = `Bandera de ${filosofo.pais.nombre}`;
+        infoPais.append(imagenPais);
+        //creamos el nombre del pais y lo agregamos a la info pais
+        let nombrePais = document.createElement('span');
+        nombrePais.innerHTML = filosofo.pais.nombre;
+        infoPais.append(nombrePais);
+        //agregamos toda la infoPais a la filaInfo
+        filaInfo.append(infoPais);
         
         // Añadimos info de la corriente a filaInfo
+        //creamos lista de info corriente
+        let infoCorriente = document.createElement('div');
+        infoCorriente.classList.add('info-corriente');
+        //creamos span de corriente y lo agregamos a la lista info corriente
+        let spanCorriente = document.createElement('span');
+        spanCorriente.innerhtml = `Corriente ${filosofo.corriente}`;
+        infoCorriente.append(spanCorriente);
+        //agregamos toda la info corriente a fila info
+        filaInfo.append(infoCorriente);
         
         // Añadimos info del arma a filaInfo
-        
+        //creamos lista de info arma
+        let infoArma = document.createElement('div');
+        infoArma.classList.add('info-arma');
+        //creamos span de arma
+        let spanArma = document.createElement('span');
+        spanArma.innerHTML = `Arma ${filosofo.arma}`;
+        //agregamos la span arma a info arma
+        infoArma.append(spanArma);
+        //agregamos toda la info arma a fila info
+        filaInfo.append(infoArma);
+
 
         // Añadimos caja de habilidades
         let habilidades = document.createElement('div');
@@ -47,13 +80,30 @@ function crearTarjetas(filosofos) {
         // Añadimos una a una las habilidades
         for (let infoHabilidad of filosofo.habilidades) {
             // Añadimos una caja de habilidad
-            
+            let skill = document.createElement('div');
+            skill.classList.add('skill');
             // Añadimos contenido caja de habilidad
             // 1.Icono de habilidad
-            
+            let icono = document.createElement('img');
+            icono.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG2_4yMKK4VjBzBQTY06LpyJea4-0pZoP16A&s";
+            icono.alt = `Icono de ${infoHabilidad.habilidad}`;
+            skill.append(icono);
             // 2.Etiqueta de habilidad
+            let nombreHabilidad = document.createElement('span');
+            nombreHabilidad.classList.add('skill-name');
+            nombreHabilidad.innerHTML = infoHabilidad.habilidad;
+            skill.append(nombreHabilidad);
             
             // 2.Barra de habilidad
+            let barra = document.createElement('div');
+            barra.classList.add('skill-bar');
+            let nivel = document.createElement('div');
+            nivel.classList.add('level');
+            nivel.style.width = `${infoHabilidad.nivel * 20}%`
+            barra.append(nivel);
+            skill.append(barra);
+
+            habilidades.append(skill);
             
         }
 
