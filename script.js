@@ -126,6 +126,21 @@ function eliminarTarjeta(tarjeta) {
     tarjeta.remove();
 }
 
+function crearNuevaTarjeta(event) {
+    event.preventDefault();
+    let nuevoFilosofo = {};
+    nuevoFilosofo.nombre = document.querySelector('.create-card-form .nombre').value;
+    nuevoFilosofo.imagen = document.querySelector('.create-card-form .foto').value;
+    nuevoFilosofo.pais = {};
+    nuevoFilosofo.pais.nombre = document.querySelector('.create-card-form .pais').value;
+    nuevoFilosofo.corriente = document.querySelector('.create-card-form .corriente').value;
+    nuevoFilosofo.arma = document.querySelector('.create-card-form .arma').value;
+    nuevoFilosofo.habilidades = [];
+    //se llama a la funcionn nuevoFilosofo como array en crearTarjetas 
+    crearTarjetas([nuevoFilosofo]);
+}
+
+
 function ordenarNombreAZ() {
     let tarjetas = Array.from(document.querySelectorAll('.card'));
     let tarjetasOrdenadas = tarjetas.sort((tarjetaA, tarjetaB) => {
@@ -145,17 +160,6 @@ function ordenarNombreAZ() {
 function ordenarNombreZA() {
 }
 
-function crearNuevaTarjeta(event) {
-    event.preventDefault();
-    let nuevoFilosofo = {};
-    nuevoFilosofo.nombre = document.querySelector('.create-card-form .nombre').value;
-    nuevoFilosofo.imagen = document.querySelector('.create-card-form .foto').value;
-    nuevoFilosofo.pais = {};
-    nuevoFilosofo.pais.nombre = document.querySelector('.create-card-form .pais').value;
-    // Completar la función
-
-    // crearTarjetas(nuevoFilosofo);
-}
 
 function parsearTarjetas(tarjetas){
     let filosofosParseados = [];
