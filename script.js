@@ -11,6 +11,12 @@ window.onload = () => {
     let botonOrdenarZA = document.querySelector('.sort-btn-za');
     botonOrdenarAZ.addEventListener('click', ordenarNombreAZ);
     botonOrdenarZA.addEventListener('click', ordenarNombreZA);
+
+    //Creamos botones para guardar y cargar tarjetas
+    let botonGuardar = document.querySelector('.save-btn');
+    let botonCargar = document.querySelector('.load-btn');
+    botonGuardar.addEventListener('click', guardarTarjetas);
+    botonCargar.addEventListener('click', cargarTarjetas); 
 }
 
 function crearTarjetas(filosofos) {
@@ -138,6 +144,7 @@ function crearNuevaTarjeta(event) {
     nuevoFilosofo.imagen = document.querySelector('.create-card-form .foto').value;
     nuevoFilosofo.pais = {};
     nuevoFilosofo.pais.nombre = document.querySelector('.create-card-form .pais').value;
+    nuevoFilosofo.pais.bandera = document.querySelector('.create-card-form .bandera').value;
     nuevoFilosofo.corriente = document.querySelector('.create-card-form .corriente').value;
     nuevoFilosofo.arma = document.querySelector('.create-card-form .arma').value;
     nuevoFilosofo.habilidades = [
@@ -161,8 +168,6 @@ function crearNuevaTarjeta(event) {
     ];
     //se llama a la funcionn nuevoFilosofo como array en crearTarjetas 
     crearTarjetas([nuevoFilosofo]);
-    //se limpia el formulario despues de crear tarjeta
-    document.querySelector('.create-card-form form').reset();
 }
 
 
@@ -176,8 +181,6 @@ function ordenarNombreAZ() {
 
     // Eliminar totes les targetes de l'array 'tarjeta'
     // Completar codi
-    
-
     // Afegir 'tarjetasOrdenadas' al contenidor de cards
     let contenedor = document.querySelector('.cards-container');
     contenedor.innerHTML = '';
@@ -210,11 +213,21 @@ function parsearTarjetas(tarjetas){
         filosofo.imagen = tarjeta.querySelector('.photo').src;
         filosofo.pais = {};
         // Completar funció
-        
+        filosofo.pais = {};
+        filosofo.pais.nombre = tarjeta.querySelector('.info-pais span').innerHTML;
+        filosofo.pais.bandera = tarjeta.querySelector('.info-pais img').src;
+        filosofo.corriente = tarjeta.querySelector('.info-corriente span').innerHTML;
+        filosofo.arma = tarjeta.querySelector('.info-arma span').innerHTML;
         let habilidades = tarjeta.querySelectorAll('.skill');
+        filosofo.habilidades = [];
         for (let habilidad of habilidades){
             let habilidadParaGuardar = {};
             // Completar funció
+            habilidadParaGuardar.habilidad = habilidad.querySelector('.skill-name').innerHTML;
+            let nivel = habilidad.querySelector('.level').style.width;
+            //en este caso dividimos sobre 20 para convertir el porcentaje en un nivel de 1-5
+            habilidadParaGuardar.nivel = parseInt(nivel) / 20;
+            filosofo.habilidades.push(habilidadParaGuardar);
         }
         filosofosParseados.push(filosofo);
     }
@@ -228,6 +241,12 @@ function guardarTarjetas(){
 
 
 function cargarTarjetas() {
+    let tarjetasGuardadas = localStorage.getItem('tarjetas');
+    let filosofos = JSON.parse(tarjetasGuardadas);
+    let contenedor = document.querySelector('.cards-container');
+    contenedor.innerHTML = '';
+    crearTarjetas(filosofos);
+    
 }
 
 const filosofos = [
