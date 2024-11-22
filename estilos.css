@@ -197,7 +197,7 @@ footer {
 
 /* Botones de filtro */
 .filter-btn,
-.sort-btn {
+.sort-btn-az, .sort-btn-za {
     display: block;
     width: 100%;
     padding: 10px 15px;

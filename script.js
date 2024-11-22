@@ -5,6 +5,12 @@ window.onload = () => {
     // Crear handlers para los botones de control
     let botonCrearTarjeta = document.querySelector('.create-btn');
     botonCrearTarjeta.addEventListener('click',crearNuevaTarjeta);
+
+    //Creamos botones para ordenar tarjetas
+    let botonOrdenarAZ = document.querySelector('.sort-btn-az');
+    let botonOrdenarZA = document.querySelector('.sort-btn-za');
+    botonOrdenarAZ.addEventListener('click', ordenarNombreAZ);
+    botonOrdenarZA.addEventListener('click', ordenarNombreZA);
 }
 
 function crearTarjetas(filosofos) {
@@ -92,9 +98,8 @@ function crearTarjetas(filosofos) {
             let nombreHabilidad = document.createElement('span');
             nombreHabilidad.classList.add('skill-name');
             nombreHabilidad.innerHTML = infoHabilidad.habilidad;
-            skill.append(nombreHabilidad);
-            
-            // 2.Barra de habilidad
+            skill.append(nombreHabilidad);       
+            // 3.Barra de habilidad
             let barra = document.createElement('div');
             barra.classList.add('skill-bar');
             let nivel = document.createElement('div');
@@ -171,13 +176,29 @@ function ordenarNombreAZ() {
 
     // Eliminar totes les targetes de l'array 'tarjeta'
     // Completar codi
+    
 
     // Afegir 'tarjetasOrdenadas' al contenidor de cards
     let contenedor = document.querySelector('.cards-container');
+    contenedor.innerHTML = '';
     // Completar codi
+    tarjetasOrdenadas.forEach(tarjeta => contenedor.append(tarjeta));
 }
 
 function ordenarNombreZA() {
+    let tarjetas = Array.from(document.querySelectorAll('.card'));
+    let tarjetasOrdenadas = tarjetas.sort((tarjetaA, tarjetaB) => {
+        let nombre1 = tarjetaA.querySelector('h3').innerHTML;
+        let nombre2 = tarjetaB.querySelector('h3').innerHTML;
+        return nombre2.localeCompare(nombre1);
+    });
+
+    //eliminamos primero todas las tarjetas 
+    let contenedor = document.querySelector('.cards-container');
+    contenedor.innerHTML = '';
+
+    //añadimos tarjetas ordenadas al contenedor
+    tarjetasOrdenadas.forEach(tarjeta => contenedor.append(tarjeta));
 }
 
 
