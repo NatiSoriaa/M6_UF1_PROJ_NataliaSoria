@@ -110,10 +110,20 @@ function crearTarjetas(filosofos) {
         // Añadimos tarjeta creada al contenedor de tarjetas
         let contenedor = document.querySelector('.cards-container');
         contenedor.append(tarjeta);
+
+        //Creamos boton para eliminar una tarjeta
+        let botonEliminar = document.createElement('div');
+        botonEliminar.innerHTML = '&#x2716';
+        botonEliminar.classList.add('botonEliminar');
+        //Agregamos el listener al boton
+        botonEliminar.addEventListener('click', () => eliminarTarjeta(tarjeta));
+        //añadir boton
+        tarjeta.append(botonEliminar);
     })
 }
 
-function eliminarTarjeta() {
+function eliminarTarjeta(tarjeta) {
+    tarjeta.remove();
 }
 
 function ordenarNombreAZ() {
