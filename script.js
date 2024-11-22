@@ -55,7 +55,7 @@ function crearTarjetas(filosofos) {
         infoCorriente.classList.add('info-corriente');
         //creamos span de corriente y lo agregamos a la lista info corriente
         let spanCorriente = document.createElement('span');
-        spanCorriente.innerhtml = `Corriente ${filosofo.corriente}`;
+        spanCorriente.innerHTML = `Corriente ${filosofo.corriente}`;
         infoCorriente.append(spanCorriente);
         //agregamos toda la info corriente a fila info
         filaInfo.append(infoCorriente);
@@ -85,7 +85,7 @@ function crearTarjetas(filosofos) {
             // Añadimos contenido caja de habilidad
             // 1.Icono de habilidad
             let icono = document.createElement('img');
-            icono.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG2_4yMKK4VjBzBQTY06LpyJea4-0pZoP16A&s";
+            icono.src = "https://images.vexels.com/content/141614/preview/circles-empty-concentric-36b396.png";
             icono.alt = `Icono de ${infoHabilidad.habilidad}`;
             skill.append(icono);
             // 2.Etiqueta de habilidad
@@ -135,9 +135,29 @@ function crearNuevaTarjeta(event) {
     nuevoFilosofo.pais.nombre = document.querySelector('.create-card-form .pais').value;
     nuevoFilosofo.corriente = document.querySelector('.create-card-form .corriente').value;
     nuevoFilosofo.arma = document.querySelector('.create-card-form .arma').value;
-    nuevoFilosofo.habilidades = [];
+    nuevoFilosofo.habilidades = [
+        {//volvemos a generar las habilidades, llamando a cada clase del html por su respectiva habilidad
+            //para esto, realizamos anteriormente un cambio en las clases de habilidades para nombrarlas por cada habilidad
+            habilidad: "Sabiduría",
+            nivel: parseInt(document.querySelector('.create-card-form .sabiduria').value),
+        },
+        {
+            habilidad: "Oratoria",
+            nivel: parseInt(document.querySelector('.create-card-form .oratoria').value),
+        },
+        {
+            habilidad: "Lógica",
+            nivel: parseInt(document.querySelector('.create-card-form .logica').value),
+        },
+        {
+            habilidad: "Innovación",
+            nivel: parseInt(document.querySelector('.create-card-form .innovacion').value),
+        }
+    ];
     //se llama a la funcionn nuevoFilosofo como array en crearTarjetas 
     crearTarjetas([nuevoFilosofo]);
+    //se limpia el formulario despues de crear tarjeta
+    document.querySelector('.create-card-form form').reset();
 }
 
 
